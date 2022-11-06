@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jQuery.min.js"></script>
+</head>
+
+<body>
+    <button class="btn1">发起单参数的get请求</button>
+    <button class="btn2">发起单参数的post请求</button>
+    <button class="btn3">ajax发起get请求</button>
+    <button class="btn4">ajax发起post请求</button>
+    <script>
+        $(function () {
+            // $.get()函数的语法
+            // jQuery中$.get() 函数的功能单一 专门用来发起get请求 从而将服务器上的资源请求到客户端来进行使用
+            // $.get(url, [data], [callback]) 
+            // 不带参数的请求
+            // $.get('http://www.liulongbin.top:3006/api/getbooks', function (res) {
+            //     console.log(res);
+            // });
+            // 带参数的请求
+            $(".btn1").on("click", function () {
+                $.get('http://www.liulongbin.top:3006/api/getbooks', { id: 1 }, function (res) {
+                    console.log(res);
+                });
+            });
+            $(".btn2").on("click", function () {
+                $.post('http://www.liulongbin.top:3006/api/addbook',
+                    { bookname: "人间失格", author: "太宰治", publisher: "上海图书出版社" }, function (res) {
+                        console.log(res);
+                    });
+            });
+            // $.ajax() 函数的语法
+            $(".btn3").on("click", function () {
+                $.ajax({
+                    type: 'GET',
+                    url: 'http://www.liulongbin.top:3006/api/getbooks',
+                    data: { id: 1 },
+                    success: function (res) {
+                        console.log(res);
+                    }
+                });
+            });
+            $(".btn4").on("click", function () {
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://www.liulongbin.top:3006/api/addbook',
+                    data: { bookname: "人格", author: "太治", publisher: "上海图书出版社" },
+                    success: function (res) {
+                        console.log(res);
+                    }
+                })
+            });
+        });
+    </script>
+</body>
+
+</html>
